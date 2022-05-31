@@ -5,12 +5,11 @@ class App {
   // ...
 
   constructor() {
-    // ...
+    this.app = express();
     this.config();
-    // ...
   }
 
-  private config():void {
+  private config(): void {
     const accessControl: express.RequestHandler = (_req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
@@ -19,12 +18,10 @@ class App {
     };
 
     this.app.use(accessControl);
-    // ...
   }
 
-  // ...
-  public start(PORT: string | number):void {
-    // ...
+  public start(PORT: string | number): void {
+    this.app.listen(PORT);
   }
 }
 
