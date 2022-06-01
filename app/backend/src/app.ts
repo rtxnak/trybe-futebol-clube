@@ -1,12 +1,13 @@
 import * as express from 'express';
+import LoginRoutes from './routes/login.routes';
 
 class App {
   public app: express.Express;
-  // ...
 
   constructor() {
     this.app = express();
     this.config();
+    this.routes();
   }
 
   private config(): void {
@@ -18,10 +19,15 @@ class App {
     };
 
     this.app.use(accessControl);
+    this.app.use(express.json());
   }
 
   public start(PORT: string | number): void {
     this.app.listen(PORT);
+  }
+
+  private routes(): void {
+    this.app.use('/login', LoginRoutes);
   }
 }
 
