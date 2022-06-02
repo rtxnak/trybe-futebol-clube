@@ -1,4 +1,4 @@
-import bcrypt = require('bcrypt');
+import bcrypt = require('bcryptjs');
 import { JwtPayload } from 'jsonwebtoken';
 import tokenGenerator from '../utils/tokenGenerator';
 import { IUsersRepository } from '../interfaces/IUserRepository.interface';
