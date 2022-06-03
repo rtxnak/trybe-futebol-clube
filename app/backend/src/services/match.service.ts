@@ -1,4 +1,4 @@
-import IMatchRepository from '../database/repostories/match.repository';
+import { IMatchRepository } from '../interfaces/IMatchRepository.interface';
 import { IMatchFindAllResult } from '../interfaces/IMatchFindAllResult.interface';
 
 class MatchService {
@@ -7,8 +7,8 @@ class MatchService {
     this._IMatchRepository = matchRepository;
   }
 
-  async findAll(): Promise<IMatchFindAllResult> {
-    const result = await this._IMatchRepository.findAll();
+  async findAll(query: boolean | null): Promise<IMatchFindAllResult> {
+    const result = await this._IMatchRepository.findAll(query);
     return { code: 200, result };
   }
 }

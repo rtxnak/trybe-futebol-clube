@@ -1,5 +1,5 @@
 import { IMatchFindAllResult } from './IMatchFindAllResult.interface';
 
 export interface IMatchService {
-  findAll(): Promise<IMatchFindAllResult>
+  findAll(query: boolean | null): Promise<IMatchFindAllResult>
 }

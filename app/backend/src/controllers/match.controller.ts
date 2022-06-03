@@ -9,7 +9,15 @@ class MatchController {
 
   async findAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const teams = await this._IMatchService.findAll();
+      const { inProgress } = req.query;
+      let query;
+      if (!inProgress) {
+        query = null;
+      } else {
+        query = inProgress === 'true';
+      }
+
+      const teams = await this._IMatchService.findAll(query);
 
       return res.status(teams.code as number).json(teams.result);
     } catch (err) {

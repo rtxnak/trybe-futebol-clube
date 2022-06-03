@@ -1,5 +1,5 @@
 import { IMatch } from './IMatch.interface';
 
 export interface IMatchRepository {
-  findAll(): Promise<IMatch[]>
+  findAll(query: boolean | null): Promise<IMatch[]>
 }
