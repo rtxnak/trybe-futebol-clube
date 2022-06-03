@@ -13,4 +13,10 @@ export default class MatchRepository {
     });
     return result;
   };
+
+  create = async (match: IMatch) => {
+    const result = await Match.create(match);
+
+    return result;
+  };
 }
