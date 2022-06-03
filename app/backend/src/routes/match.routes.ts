@@ -13,4 +13,8 @@ matchRouter.get('/', (req, res, next) => {
   matchController.findAll(req, res, next);
 });
 
+matchRouter.post('/', (req, res, next) => {
+  matchController.create(req, res, next);
+});
+
 export default matchRouter;
