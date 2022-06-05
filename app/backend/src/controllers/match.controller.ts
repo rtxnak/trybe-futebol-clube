@@ -35,6 +35,17 @@ class MatchController {
       next(err);
     }
   }
+
+  async finish(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const matchFinished = await this._IMatchService.finish(Number(id));
+
+      return res.status(matchFinished.code as number).json(matchFinished.result);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default MatchController;

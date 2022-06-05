@@ -17,4 +17,8 @@ matchRouter.post('/', (req, res, next) => {
   matchController.create(req, res, next);
 });
 
+matchRouter.patch('/:id/finish', (req, res, next) => {
+  matchController.finish(req, res, next);
+});
+
 export default matchRouter;
