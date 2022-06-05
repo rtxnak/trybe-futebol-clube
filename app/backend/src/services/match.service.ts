@@ -19,6 +19,17 @@ class MatchService {
     const result = await this._IMatchRepository.create(match);
     return { code: 201, result };
   }
+
+  async finish(id: number) {
+    const finishResult = await this._IMatchRepository.finish(id);
+
+    if (finishResult) {
+      const result = { message: 'Finished' };
+      return { code: 200, result };
+    }
+    const result = { message: 'Already finished' };
+    return { code: 400, result };
+  }
 }
 
 export default MatchService;
