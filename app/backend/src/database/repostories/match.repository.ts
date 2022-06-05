@@ -19,4 +19,10 @@ export default class MatchRepository {
 
     return result;
   };
+
+  finish = async (id: number) => {
+    const update = await Match.update({ inProgress: false }, { where: { id } });
+    const result = update[0];
+    return result;
+  };
 }
