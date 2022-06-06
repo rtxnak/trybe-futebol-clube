@@ -40,6 +40,23 @@ class MatchService {
     const result = { message: 'Already finished' };
     return { code: 400, result };
   }
+
+  async update(id: number, homeTeamGoals: number, awayTeamGoals: number) {
+    const updateResult = await this._IMatchRepository.update(id, homeTeamGoals, awayTeamGoals);
+
+    if (updateResult) {
+      const result = {
+        update: {
+          homeTeamGoals,
+          awayTeamGoals,
+        },
+        message: 'Goals Updated',
+      };
+      return { code: 200, result };
+    }
+    const result = { message: 'Goals have not been updated' };
+    return { code: 400, result };
+  }
 }
 
 export default MatchService;
