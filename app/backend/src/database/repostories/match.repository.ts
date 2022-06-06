@@ -25,4 +25,13 @@ export default class MatchRepository {
     const result = update[0];
     return result;
   };
+
+  update = async (id: number, homeTeamGoals: number, awayTeamGoals: number) => {
+    const update = await Match.update(
+      { homeTeamGoals, awayTeamGoals },
+      { where: { id } },
+    );
+    const result = update[0];
+    return result;
+  };
 }
