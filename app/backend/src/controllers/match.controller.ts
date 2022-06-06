@@ -36,12 +36,17 @@ class MatchController {
     }
   }
 
-  async finish(req: Request, res: Response, next: NextFunction) {
+  async finishOrUpdate(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const matchFinished = await this._IMatchService.finish(Number(id));
-
-      return res.status(matchFinished.code as number).json(matchFinished.result);
+      const { homeTeamGoals, awayTeamGoals } = req.body;
+      if (!homeTeamGoals || !awayTeamGoals) {
+        const matchFinished = await this._IMatchService.finish(Number(id));
+        return res.status(matchFinished.code as number).json(matchFinished.result);
+      }
+      const matchUpdated = await this._IMatchService
+        .update(Number(id), homeTeamGoals, awayTeamGoals);
+      return res.status(matchUpdated.code as number).json(matchUpdated.result);
     } catch (err) {
       next(err);
     }
