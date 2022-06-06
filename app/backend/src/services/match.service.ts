@@ -14,10 +14,20 @@ class MatchService {
   }
 
   async create(match: IMatch) {
-    const matchValue = match;
-    matchValue.inProgress = true;
-    const result = await this._IMatchRepository.create(match);
-    return { code: 201, result };
+    try {
+      const matchValue = match;
+      matchValue.inProgress = true;
+
+      if (matchValue.homeTeam === matchValue.awayTeam) {
+        const result = { message: 'It is not possible to create a match with two equal teams' };
+        return { code: 401, result };
+      }
+      const result = await this._IMatchRepository.create(match);
+      return { code: 201, result };
+    } catch (err) {
+      const result = { message: 'There is no team with such id!' };
+      return { code: 404, result };
+    }
   }
 
   async finish(id: number) {
