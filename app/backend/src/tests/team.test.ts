@@ -63,27 +63,27 @@ describe('Team API test', () => {
       expect(message).to.be.equal('not found');
     });
   });
-});
 
-describe('GET /teams/:id SUCESSO', () => {
-  let chaiHttpResponse: Response;
+  describe('GET /teams/:id SUCESSO', () => {
+    let chaiHttpResponse: Response;
 
-  before(async () => {
-    sinon.stub(Team, 'findOne').resolves(teamIDResult as Team);
+    before(async () => {
+      sinon.stub(Team, 'findOne').resolves(teamIDResult as Team);
 
-    chaiHttpResponse = await chai
-      .request(app)
-      .get('/teams/5')
-  })
+      chaiHttpResponse = await chai
+        .request(app)
+        .get('/teams/5')
+    })
 
-  after(() => {
-    (Team.findOne as sinon.SinonStub).restore();
-  })
+    after(() => {
+      (Team.findOne as sinon.SinonStub).restore();
+    })
 
-  it('retorna status code "200"', () => {
-    expect(chaiHttpResponse).to.have.status(200);
-  });
-  it('retorna um objeto refente ao id especifico', () => {
-    expect(chaiHttpResponse.body).to.be.deep.eq(teamIDResult);
+    it('retorna status code "200"', () => {
+      expect(chaiHttpResponse).to.have.status(200);
+    });
+    it('retorna um objeto refente ao id especifico', () => {
+      expect(chaiHttpResponse.body).to.be.deep.eq(teamIDResult);
+    });
   });
 });
